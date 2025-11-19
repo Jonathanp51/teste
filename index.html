@@ -3,102 +3,201 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard Perfect Presell</title>
-    <link rel="stylesheet" href="style.css">
-    <!-- Fonte Roboto (Padrão de Dashboards modernos) -->
+    <title>Perfect Presell - Dashboard</title>
+    
+    <!-- 1. Dependências (Tailwind + Fonte + Ícones) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/lucide@latest"></script>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <style>
+        body { font-family: 'Roboto', sans-serif; }
+        /* Scrollbar personalizada para combinar com o tema dark */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #111827; }
+        ::-webkit-scrollbar-thumb { background: #374151; border-radius: 4px; }
+        
+        /* Efeito de gradiente animado suave */
+        .bg-gradient-animate {
+            background-size: 200% 200%;
+            animation: gradientMove 5s ease infinite;
+        }
+        @keyframes gradientMove {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
 </head>
-<body>
+<body class="bg-gray-900 text-gray-100 overflow-hidden">
 
-    <div class="pp-dashboard-wrap">
+    <!-- CONTAINER PRINCIPAL (Tela Cheia) -->
+    <div class="flex h-screen w-full">
         
-        <!-- Logo e Header -->
-        <div class="pp-header-container">
-            <div class="pp-dashboard-logo">
-                <!-- Usei um placeholder para o logo, se a imagem original quebrar -->
-                <img src="https://perfectpresell.com/wp-content/uploads/2025/08/LOGO-PERFECT-PRESELL-RETO.webp" alt="Perfect Presell" class="pp-logo-img">
+        <!-- 2. MENU LATERAL (SIDEBAR) -->
+        <aside class="w-64 bg-gray-950 border-r border-gray-800 flex flex-col shrink-0 transition-all duration-300">
+            <!-- Logo -->
+            <div class="p-6 flex items-center gap-3 border-b border-gray-800 h-20">
+                <div class="w-10 h-10 bg-gradient-to-br from-green-600 to-green-800 rounded-lg flex items-center justify-center font-bold text-white shadow-lg shadow-green-900/50 text-xl">P</div>
+                <div class="flex flex-col">
+                    <span class="font-bold text-lg tracking-tight text-white leading-none">PERFECT</span>
+                    <span class="font-bold text-sm text-green-500 tracking-widest leading-none">PRESELL</span>
+                </div>
             </div>
-            <div class="pp-header-title">
-                <h1>SUA PRESELL COM ESTILO!</h1>
+
+            <!-- Navegação -->
+            <nav class="flex-1 p-4 space-y-2 overflow-y-auto">
+                <!-- Item Ativo (Dashboard) -->
+                <a href="#" class="flex items-center gap-3 px-4 py-3 rounded-lg bg-green-600 text-white shadow-lg shadow-green-900/50 transition-all group">
+                    <i data-lucide="layout-dashboard" class="w-5 h-5"></i>
+                    <span class="font-medium">Dashboard</span>
+                </a>
+
+                <a href="criar-presell.html" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition-all group">
+                    <i data-lucide="plus-circle" class="w-5 h-5 group-hover:text-green-400 transition-colors"></i>
+                    <span class="font-medium">Criar Nova</span>
+                </a>
+
+                <a href="minhas-presells.html" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition-all group">
+                    <i data-lucide="list" class="w-5 h-5 group-hover:text-green-400 transition-colors"></i>
+                    <span class="font-medium">Minhas Presells</span>
+                </a>
+
+                <a href="criar-ia.html" class="flex items-center gap-3 px-4 py-3 rounded-lg text-gray-400 hover:bg-gray-800 hover:text-white transition-all group">
+                    <i data-lucide="bot" class="w-5 h-5 group-hover:text-green-400 transition-colors"></i>
+                    <span class="font-medium">Presell com IA</span>
+                </a>
+            </nav>
+            
+            <!-- Footer do Menu -->
+            <div class="p-4 border-t border-gray-800">
+                <div class="flex items-center gap-3 px-4 py-2 mb-2">
+                    <div class="w-8 h-8 rounded-full bg-gray-700 flex items-center justify-center text-xs text-white font-bold">JM</div>
+                    <div class="flex flex-col">
+                        <span class="text-sm text-white font-medium">Jonathan M.</span>
+                        <span class="text-xs text-gray-500">Admin</span>
+                    </div>
+                </div>
+                <a href="#" class="flex items-center gap-3 text-red-400 hover:text-red-300 hover:bg-red-900/20 transition-colors w-full p-2 rounded text-sm">
+                    <i data-lucide="log-out" class="w-4 h-4"></i>
+                    <span>Sair</span>
+                </a>
             </div>
-        </div>
-        
-        <!-- Banner de Boas-vindas (Verde) -->
-        <div class="pp-welcome-banner">
-            <div class="pp-banner-content">
-                <h2>Bem-vindo ao Perfect Presell!</h2>
-                <p><strong>O melhor criador de presells com IA do mercado!</strong> Você está usando a IA mais potente e avançada para criar presells de alta conversão em minutos. Aproveite todas as funcionalidades profissionais!</p>
+        </aside>
+
+        <!-- 3. ÁREA PRINCIPAL (CONTEÚDO) -->
+        <main class="flex-1 flex flex-col min-w-0 bg-gray-900 relative">
+            
+            <!-- Top Header -->
+            <header class="h-20 bg-gray-900/95 backdrop-blur border-b border-gray-800 flex items-center justify-between px-8 shrink-0 z-20">
+                <div>
+                    <h1 class="text-2xl font-bold text-white">Bem-vindo de volta! 👋</h1>
+                    <p class="text-gray-400 text-sm">Aqui está o resumo das suas páginas.</p>
+                </div>
                 
-                <div class="pp-banner-features">
-                    <span class="pp-feature">🤖 IA Mais Potente do Mercado</span>
-                    <span class="pp-feature">✅ Presells Profissionais</span>
-                    <span class="pp-feature">⚡ Criação em Minutos</span>
-                    <span class="pp-feature">📊 Análise de Conversão</span>
-                    <span class="pp-feature">🔗 Integrações Code</span>
-                    <span class="pp-feature">🎨 Temas Customizáveis</span>
-                    <span class="pp-feature">🔐 Segurança Avançada</span>
+                <div class="flex items-center gap-4">
+                    <button class="p-2 text-gray-400 hover:text-white hover:bg-gray-800 rounded-full transition-all relative">
+                        <i data-lucide="bell" class="w-5 h-5"></i>
+                        <span class="absolute top-2 right-2 w-2 h-2 bg-green-500 rounded-full"></span>
+                    </button>
+                    <a href="criar-presell.html" class="flex items-center gap-2 bg-white text-gray-900 hover:bg-gray-200 px-5 py-2.5 rounded-lg font-bold transition-all shadow-lg text-sm">
+                        <i data-lucide="plus" class="w-4 h-4"></i>
+                        NOVA PÁGINA
+                    </a>
+                </div>
+            </header>
+
+            <!-- Conteúdo com Scroll -->
+            <div class="flex-1 overflow-y-auto p-8 pb-20">
+                <div class="max-w-6xl mx-auto space-y-8">
+                    
+                    <!-- BANNER DE BOAS-VINDAS (Migrado para Tailwind) -->
+                    <div class="bg-gradient-to-r from-green-600 to-green-800 rounded-2xl p-8 shadow-2xl shadow-green-900/30 relative overflow-hidden group">
+                        <!-- Efeito de fundo -->
+                        <div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-5 rounded-full -translate-y-1/2 translate-x-1/3 blur-3xl transition-all group-hover:opacity-10"></div>
+
+                        <div class="relative z-10">
+                            <h2 class="text-3xl font-bold mb-4">Potencialize suas vendas com IA! 🚀</h2>
+                            <p class="text-green-50 text-lg mb-6 max-w-2xl leading-relaxed">
+                                Você está usando a IA mais potente e avançada para criar presells de alta conversão em minutos. Aproveite todas as funcionalidades profissionais!
+                            </p>
+                            
+                            <!-- Badges -->
+                            <div class="flex flex-wrap gap-3">
+                                <span class="bg-black/20 backdrop-blur px-3 py-1.5 rounded-full text-sm font-medium border border-white/10 flex items-center gap-2">
+                                    🤖 IA Potente
+                                </span>
+                                <span class="bg-black/20 backdrop-blur px-3 py-1.5 rounded-full text-sm font-medium border border-white/10 flex items-center gap-2">
+                                    ⚡ Criação Flash
+                                </span>
+                                <span class="bg-black/20 backdrop-blur px-3 py-1.5 rounded-full text-sm font-medium border border-white/10 flex items-center gap-2">
+                                    📊 Analytics
+                                </span>
+                                <span class="bg-black/20 backdrop-blur px-3 py-1.5 rounded-full text-sm font-medium border border-white/10 flex items-center gap-2">
+                                    🔐 Blindado
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- SEÇÃO DE AVISOS -->
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-300 mb-4 flex items-center gap-2">
+                            <i data-lucide="megaphone" class="w-5 h-5 text-yellow-500"></i>
+                            Avisos e Atualizações
+                        </h3>
+                        
+                        <div class="bg-gray-800 border border-gray-700 rounded-xl p-6 flex items-start gap-4">
+                            <div class="w-12 h-12 rounded-lg bg-blue-500/10 flex items-center justify-center shrink-0 text-blue-400">
+                                <i data-lucide="info" class="w-6 h-6"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-white font-medium text-lg">Nenhum aviso importante</h4>
+                                <p class="text-gray-400 mt-1">Seu sistema está atualizado e funcionando perfeitamente.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- AÇÕES RÁPIDAS (Grid) -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        
+                        <!-- Card 1 -->
+                        <a href="criar-presell.html" class="bg-gray-800 border border-gray-700 p-8 rounded-2xl hover:bg-gray-750 hover:border-green-500/50 hover:-translate-y-1 transition-all duration-300 group text-center flex flex-col items-center">
+                            <div class="w-16 h-16 bg-gray-900 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform border border-gray-700 group-hover:border-green-500">
+                                <i data-lucide="plus" class="w-8 h-8 text-green-500"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Criar Nova Presell</h3>
+                            <p class="text-gray-400 text-sm">Comece uma página do zero agora mesmo.</p>
+                        </a>
+
+                        <!-- Card 2 -->
+                        <a href="minhas-presells.html" class="bg-gray-800 border border-gray-700 p-8 rounded-2xl hover:bg-gray-750 hover:border-blue-500/50 hover:-translate-y-1 transition-all duration-300 group text-center flex flex-col items-center">
+                            <div class="w-16 h-16 bg-gray-900 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform border border-gray-700 group-hover:border-blue-500">
+                                <i data-lucide="file-text" class="w-8 h-8 text-blue-500"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Ver Todas (8)</h3>
+                            <p class="text-gray-400 text-sm">Gerencie suas páginas existentes.</p>
+                        </a>
+
+                        <!-- Card 3 -->
+                        <a href="criar-ia.html" class="bg-gray-800 border border-gray-700 p-8 rounded-2xl hover:bg-gray-750 hover:border-purple-500/50 hover:-translate-y-1 transition-all duration-300 group text-center flex flex-col items-center">
+                            <div class="w-16 h-16 bg-gray-900 rounded-full flex items-center justify-center mb-4 group-hover:scale-110 transition-transform border border-gray-700 group-hover:border-purple-500">
+                                <i data-lucide="bot" class="w-8 h-8 text-purple-500"></i>
+                            </div>
+                            <h3 class="text-xl font-bold text-white mb-2">Presell com IA</h3>
+                            <p class="text-gray-400 text-sm">Geração automática de conteúdo.</p>
+                        </a>
+                        
+                    </div>
+
                 </div>
             </div>
-        </div>
-        
-        <!-- Seção de Avisos (Igual à imagem "Nenhum aviso", mas mantendo seu código se quiser usar depois) -->
-        <div class="pp-notices-section">
-            <div class="section-title">
-                📢 Avisos e Atualizações
-            </div>
-            
-            <div id="pp-plm-notices-container">
-                <!-- ESTADO VAZIO (Como na sua imagem) -->
-                <div class="pp-notice pp-notice-info">
-                    <div class="pp-notice-icon">ℹ️</div>
-                    <div class="pp-notice-content">
-                        <h3>Nenhum aviso no momento</h3>
-                        <p>Não há avisos importantes para exibir no momento.</p>
-                    </div>
-                </div>
-
-                <!-- 
-                   DICA: Se quiser mostrar os avisos do seu código original (vídeos do YouTube), 
-                   basta descomentar o código abaixo e apagar o bloco "ESTADO VAZIO" acima.
-                -->
-                <!-- 
-                <div class="pp-notice pp-notice-content-card">
-                    <div class="pp-notice-image">
-                        <img src="http://elevatedigital.com.br/wp-content/uploads/2025/11/presell-pressel.jpg" alt="Thumbnail">
-                    </div>
-                    <div class="pp-text-content">
-                        <h3>Perfect Presell: Backup TOTAL em 2 CLIQUES</h3>
-                        <p>Acesse um dos recursos mais poderosos e simples: BACKUP TOTAL.</p>
-                        <a href="#" class="pp-notice-cta">CLIQUE AQUI PARA ASSISTIR! →</a>
-                    </div>
-                </div> 
-                -->
-            </div>
-        </div>
-        
-        <!-- Ações Rápidas (Os 3 Cards de baixo) -->
-        <div class="pp-quick-actions-grid">
-            <!-- Linkando para outra página HTML para testar navegação -->
-            <a href="criar-presell.html" class="pp-action-card">
-                <div class="pp-action-icon">➕</div>
-                <h3>Criar Nova Presell</h3>
-                <p>Crie uma nova página de presell do zero</p>
-            </a>
-            
-            <a href="minhas-presells.html" class="pp-action-card">
-                <div class="pp-action-icon">📋</div>
-                <h3>Ver Todas (8)</h3>
-                <p>Gerencie suas presells existentes</p>
-            </a>
-            
-            <a href="criar-ia.html" class="pp-action-card">
-                <div class="pp-action-icon">🤖</div>
-                <h3>Presell com IA</h3>
-                <p>Crie presells automaticamente com IA</p>
-            </a>
-        </div>
-
+        </main>
     </div>
 
+    <!-- 4. Script para renderizar os ícones -->
+    <script>
+        lucide.createIcons();
+    </script>
 </body>
 </html>
